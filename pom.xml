@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.tranduytoan.dict</groupId>
-  <artifactId>my-dictionary</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <groupId>com.tdt</groupId>
+  <artifactId>dict</artifactId>
+  <version>1.0</version>
   <name>OOP_Project</name>
 
   <properties>
@@ -14,6 +14,11 @@
 <junit.version>5.9.2</junit.version>  </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.42.0.0</version>
+    </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -66,7 +71,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.tranduytoan.dict.mydictionary/com.tranduytoan.dict.mydictionary.HelloApplication</mainClass>
+              <mainClass>com.tdt.dict/com.tdt.dict.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
