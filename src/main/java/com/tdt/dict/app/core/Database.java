@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Database {
@@ -26,7 +27,10 @@ public class Database {
 
 //            String url = "jdbc:sqlite::resource:database/dictionary.db";
 //            String url = "jdbc:sqlite:" + parentDirpath + "/classes/database/dictionary.db";
-            String url = "jdbc:sqlite:" + getClass().getResource("/database/dictionary.db").toString();
+            String url = "jdbc:sqlite:"
+                    + Objects.requireNonNull(
+                    getClass().getResource(
+                            "/database/dictionary.db")).getPath();
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException | URISyntaxException e) {
@@ -55,7 +59,7 @@ public class Database {
             System.out.println("Connection to SQLite has been failed.");
             return "Connection to SQLite has been failed.";
         }
-        String sql = "SELECT description FROM av WHERE word = ?";
+        String sql = "SELECT html FROM av WHERE word = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, word);
@@ -68,7 +72,7 @@ public class Database {
                 return "Not found";
             } else {
                 do {
-                    String description = rs.getString("description");
+                    String description = rs.getString("html");
                     System.out.println(description);
                     result.append(description).append("\n");
                 } while (rs.next());

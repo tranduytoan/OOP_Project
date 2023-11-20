@@ -5,28 +5,24 @@ import com.tdt.dict.app.core.Database;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
-import java.util.Scanner;
 
 public class Controller {
 
     @FXML
-    private Text myText;
+    private WebView myWebView;
     @FXML
     private TextField inputField;
+
+    private WebEngine engine;
 
     @FXML
     public void search() {
         Database.word = inputField.getText();
         String define = App.search(Database.word);
-        myText.setText(define);
-    }
-
-    @FXML
-    public void input() {
-        System.out.println("Enter word: ");
-        Scanner sc = new Scanner(System.in);
-        Database.word = sc.nextLine();
+        engine = myWebView.getEngine();
+        engine.loadContent(define);
     }
 }

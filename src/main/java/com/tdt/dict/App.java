@@ -12,6 +12,7 @@ public class App extends Application {
     public static Database database = new Database();
 
     public static void main(String[] args) {
+        database.Connect();
         launch();
     }
 
