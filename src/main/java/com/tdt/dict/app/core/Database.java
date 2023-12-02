@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Database {
     private Connection conn;
-    public static String word = "";
 
     /**
      * Kết nối đến db
@@ -27,10 +26,11 @@ public class Database {
 
 //            String url = "jdbc:sqlite::resource:database/dictionary.db";
 //            String url = "jdbc:sqlite:" + parentDirpath + "/classes/database/dictionary.db";
-            String url = "jdbc:sqlite:"
-                    + Objects.requireNonNull(
-                    getClass().getResource(
-                            "/database/dictionary.db")).getPath();
+            String url = "jdbc:sqlite:" + parentDirpath + "/classes/database/dictionary.db";
+//            String url = "jdbc:sqlite:"
+//                    + Objects.requireNonNull(
+//                    getClass().getResource(
+//                            "/database/dictionary.db")).getPath();
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException | URISyntaxException e) {

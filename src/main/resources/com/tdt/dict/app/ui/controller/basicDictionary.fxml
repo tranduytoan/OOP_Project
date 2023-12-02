@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0"
+            prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tdt.dict.app.ui.controller.BasicDictionaryController">
+   <children>
+      <TextField fx:id="wordInput" layoutX="22.0" layoutY="22.0" onAction="#search" prefHeight="25.0"
+                 prefWidth="200.0"/>
+      <ListView layoutX="22.0" layoutY="67.0" prefHeight="484.0" prefWidth="200.0"/>
+      <ScrollPane layoutX="243.0" layoutY="67.0" prefHeight="484.0" prefWidth="643.0">
+         <content>
+            <WebView fx:id="wordDefine" prefHeight="482.0" prefWidth="641.0"/>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
