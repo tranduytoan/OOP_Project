@@ -12,22 +12,6 @@ import javafx.stage.Stage;
 
 
 public class MainController implements Initializable {
-
-//    @FXML
-//    private WebView myWebView;
-//    @FXML
-//    private TextField inputField;
-//
-//    private WebEngine engine;
-//
-//    @FXML
-//    public void search() {
-//        Database.word = inputField.getText();
-//        String define = App.search(Database.word);
-//        engine = myWebView.getEngine();
-//        engine.loadContent(define);
-//    }
-
     private static MainController instance;
     protected double xOffset = 0;
     protected double yOffset = 0;

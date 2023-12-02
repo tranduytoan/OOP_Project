@@ -22,7 +22,7 @@ public class App extends Application {
         Scene scene = new Scene(test.load());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.setTitle("Test");
+        stage.setTitle("MyDictionary");
         stage.setResizable(false);
         stage.show();
     }
