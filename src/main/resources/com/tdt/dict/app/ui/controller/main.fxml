@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ImageInput?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,54 +16,61 @@
             prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.tdt.dict.app.ui.controller.MainController">
    <children>
-      <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="900.0" style="-fx-border-radius: 14;"
-                  AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="900.0" style="-fx-border-radius: 14;"
+                   styleClass="borderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane fx:id="titlePane" onMouseClicked="#handleClicked" onMouseDragged="#handleDrag"
-                        onMousePressed="#handlePressed" prefHeight="35.0" prefWidth="900.0"
-                        style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
+             <AnchorPane fx:id="titlePane" onMouseClicked="#handleClicked" onMouseDragged="#handleDrag"
+                         onMousePressed="#handlePressed" prefHeight="35.0" prefWidth="900.0"
+                         style="-fx-background-color: #313233;" styleClass="title-bar" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="35.0"
-                          prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                          AnchorPane.topAnchor="0.0">
+                   <Button fx:id="btClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="35.0"
+                           prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                           AnchorPane.topAnchor="0.0">
                      <effect>
                         <ImageInput>
                            <source>
-                              <Image url="@../../../../../../images/close-35.png"/>
+                               <Image url="@../../../../../../images/close-35.png"/>
                            </source>
                         </ImageInput>
                      </effect>
                   </Button>
-                  <Button fx:id="btMin" layoutX="820.0" mnemonicParsing="false" onAction="#handleMinimize"
-                          prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <Button fx:id="btMin" layoutX="830.0" mnemonicParsing="false" onAction="#handleMinimize"
+                           prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <effect>
                         <ImageInput>
                            <source>
-                              <Image url="@../../../../../../images/minimize-35.png"/>
+                               <Image url="@../../../../../../images/minimize-35.png"/>
                            </source>
                         </ImageInput>
                      </effect>
                   </Button>
-                  <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <MenuBar style="-fx-background-color: #555555;" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
                      <menus>
                         <Menu mnemonicParsing="false" text="File">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Close"/>
+                               <MenuItem id="close" mnemonicParsing="false" text="Close"/>
                            </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
+                         <Menu mnemonicParsing="false" text="Mode">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Delete"/>
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="About"/>
+                               <RadioMenuItem fx:id="btnDict" mnemonicParsing="false" onAction="#switchBasicDict"
+                                              selected="true" text="Dictionary">
+                                   <toggleGroup>
+                                       <ToggleGroup fx:id="mode"/>
+                                   </toggleGroup>
+                               </RadioMenuItem>
+                               <RadioMenuItem fx:id="btnGtrans" mnemonicParsing="false" onAction="#switchGtrans"
+                                              text="GoogleTranslate" toggleGroup="$mode"/>
                            </items>
                         </Menu>
                      </menus>
+                       <opaqueInsets>
+                           <Insets/>
+                       </opaqueInsets>
                      <padding>
-                        <Insets left="5.0" top="5.0"/>
+                         <Insets top="5.0"/>
                      </padding>
                   </MenuBar>
                </children>

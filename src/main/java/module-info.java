@@ -6,6 +6,9 @@ module com.tdt.dict {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires org.xerial.sqlitejdbc;
+    requires javafx.media;
+    requires jlayer;
 
     opens com.tdt.dict.app.ui.controller to javafx.fxml;
     exports com.tdt.dict;

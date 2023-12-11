@@ -4,11 +4,28 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Database {
+    private static Database instance;
     private Connection conn;
+
+    private Database() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = null;
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
 
     /**
      * Kết nối đến db
@@ -52,14 +69,16 @@ public class Database {
         }
     }
 
-    public String Search(String word) {
-        StringBuilder result = new StringBuilder();
+    public Word Search(String word) {
+        StringBuilder description = new StringBuilder();
+        StringBuilder pronounce = new StringBuilder();
+        StringBuilder html = new StringBuilder();
         this.Connect();
         if (conn == null) {
             System.out.println("Connection to SQLite has been failed.");
-            return "Connection to SQLite has been failed.";
+            return null;
         }
-        String sql = "SELECT html FROM av WHERE word = ?";
+        String sql = "SELECT * FROM av WHERE word = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, word);
@@ -69,21 +88,22 @@ public class Database {
 
             if (!rs.next()) {
                 System.out.println("Not found");
-                return "Not found";
+                return null;
             } else {
                 do {
-                    String description = rs.getString("html");
-                    System.out.println(description);
-                    result.append(description).append("\n");
+                    html.append(rs.getString("html"));
+                    description.append(rs.getString("description"));
+                    pronounce.append(rs.getString("pronounce"));
                 } while (rs.next());
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return result.toString();
+        System.out.println("Search successfully");
+        return new Word(word, html.toString(), description.toString(), pronounce.toString());
     }
 
-    public void Insert(String word, String html, String description, String pronounce) {
+    public void Insert(Word word) {
         this.Connect();
         if (conn == null) {
             System.out.println("Connection to SQLite has been failed.");
@@ -92,10 +112,10 @@ public class Database {
         String sql = "INSERT INTO av(word, html, description, pronounce) VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, word);
-            stmt.setString(2, html);
-            stmt.setString(3, description);
-            stmt.setString(4, pronounce);
+            stmt.setString(1, word.getWordTarget());
+            stmt.setString(2, word.getWordHtml());
+            stmt.setString(3, word.getWordExplain());
+            stmt.setString(4, word.getWordPronounce());
 
             //execute query
             int rs = stmt.executeUpdate();
@@ -109,19 +129,83 @@ public class Database {
         }
     }
 
-    public void Commit() {
+    public void DeleteWord(Word word) {
         this.Connect();
         if (conn == null) {
             System.out.println("Connection to SQLite has been failed.");
             return;
         }
-
+        String sql = "DELETE FROM av WHERE word = ?";
         try {
-            conn.commit();
-            System.out.println("Commit successfully");
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, word.getWordTarget());
+
+            //execute query
+            int rs = stmt.executeUpdate();
+            if (rs > 0) {
+                System.out.println("Delete successfully");
+            } else {
+                System.out.println("Delete failed");
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void EditWord(Word word) {
+        this.Connect();
+        if (conn == null) {
+            System.out.println("Connection to SQLite has been failed.");
+            return;
+        }
+        String sql = "UPDATE av SET html = ?, description = ?, pronounce = ? WHERE word = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, word.getWordHtml());
+            stmt.setString(2, word.getWordExplain());
+            stmt.setString(3, word.getWordPronounce());
+            stmt.setString(4, word.getWordTarget());
+
+            //execute query
+            int rs = stmt.executeUpdate();
+            if (rs > 0) {
+                System.out.println("Edit successfully");
+            } else {
+                System.out.println("Edit failed");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<Word> getAllWords() {
+        ArrayList<Word> words = new ArrayList<>();
+        this.Connect();
+        if (conn == null) {
+            System.out.println("Connection to SQLite has been failed.");
+            return words;
+        }
+        String sql = "SELECT * FROM av";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            //execute query
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                System.out.println("Not found");
+                return words;
+            } else {
+                do {
+                    String word = rs.getString("word");
+                    String description = rs.getString("description");
+                    words.add(new Word(word, description));
+                } while (rs.next());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return words;
     }
 
     public static void main(String[] args) {
@@ -149,9 +233,6 @@ public class Database {
                     search = true;
                     insert = false;
                     continue;
-                case "/commit":
-                    main.Commit();
-                    continue;
                 default:
                     if (insert) {
                         if (word.isEmpty()) {
@@ -173,7 +254,7 @@ public class Database {
                         if (pronounce.isEmpty()) {
                             pronounce = "null";
                         }
-                        main.Insert(word, html, description, pronounce);
+                        main.Insert(new Word(word, html, description, pronounce));
                     } else if (search) {
                         main.Search(word);
                     }

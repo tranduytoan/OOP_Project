@@ -21,6 +21,32 @@ public class Trie {
         node.isEndOfWord = true;
     }
 
+    // Xóa một từ khỏi Trie
+    public void deleteWord(String word) {
+        delete(root, word, 0);
+    }
+
+    private boolean delete(TrieNode current, String word, int index) {
+        if (index == word.length()) {
+            if (!current.isEndOfWord) {
+                return false;
+            }
+            current.isEndOfWord = false;
+            return current.children.isEmpty();
+        }
+        char ch = word.charAt(index);
+        TrieNode node = current.children.get(ch);
+        if (node == null) {
+            return false;
+        }
+        boolean shouldDeleteCurrentNode = delete(node, word, index + 1) && !node.isEndOfWord;
+        if (shouldDeleteCurrentNode) {
+            current.children.remove(ch);
+            return current.children.isEmpty();
+        }
+        return false;
+    }
+
     // Kiểm tra xem một từ có tồn tại trong Trie không
     public boolean search(String word) {
         TrieNode node = searchNode(word);
@@ -48,18 +74,18 @@ public class Trie {
         ArrayList<String> words = new ArrayList<>();
         TrieNode node = searchNode(prefix);
         if (node != null) {
-            dfsGetWordsSubtree(node, prefix, words);
+            dfsSearch(node, prefix, words);
         }
         return words;
     }
 
-    private void dfsGetWordsSubtree(TrieNode node, String word, ArrayList<String> words) {
+    private void dfsSearch(TrieNode node, String word, ArrayList<String> words) {
         if (node.isEndOfWord) {
             words.add(word);
         }
         for (char ch : node.children.keySet()) {
             if (node.children.get(ch) != null) {
-                dfsGetWordsSubtree(node.children.get(ch), word + ch, words);
+                dfsSearch(node.children.get(ch), word + ch, words);
             }
         }
     }

@@ -1,0 +1,25 @@
+.root {
+    -fx-background-radius: 15;
+    -fx-background-color: #ffffff;
+}
+
+.title-bar {
+    -fx-background-color: #313233;
+}
+
+.menu-bar {
+    -fx-accent: #00FFD6;
+    -fx-selection-bar-text: red;
+}
+
+.borderPane {
+    -fx-background-color: #252526;
+}
+
+.searchList {
+    -fx-background-color: #1E1E1E;
+}
+
+.defineView {
+    -fx-background-color: #1E1E1E;
+}
