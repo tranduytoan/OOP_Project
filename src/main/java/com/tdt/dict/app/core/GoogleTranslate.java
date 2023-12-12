@@ -48,7 +48,7 @@ public class GoogleTranslate {
         }
     }
 
-    private static String translate(lang langFrom, lang langTo, String text) throws IOException {
+    public static String translate(lang langFrom, lang langTo, String text) throws IOException {
         String urlStr = String.format(
                 TRANSLATE_URL,
                 URLEncoder.encode(text, StandardCharsets.UTF_8),
