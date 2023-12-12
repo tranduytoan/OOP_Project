@@ -49,6 +49,11 @@ public class BasicDictionary extends Dictionary {
         if (wordObj == null) {
             return "Not found";
         }
+        if (wordObj.getWordHtml() == null ||
+                wordObj.getWordHtml().equals("<html dir=\"ltr\"><head></head><body contenteditable=\"true\"></body></html>")) {
+            return wordObj.getWordExplain();
+        }
+        System.out.println(wordObj.getWordHtml());
         return wordObj.getWordHtml();
     }
 

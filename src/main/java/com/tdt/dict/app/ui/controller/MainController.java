@@ -8,9 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Objects;
 
@@ -48,5 +50,16 @@ public class MainController extends WindowController {
 
     public void switchBasicDict(ActionEvent event) throws Exception {
         borderPane.setCenter(basicDict);
+    }
+
+    public void openAddWordWindow(ActionEvent event) throws Exception {
+        Stage stage = new Stage();
+        stage.setTitle("Add Word");
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addWord.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
     }
 }
