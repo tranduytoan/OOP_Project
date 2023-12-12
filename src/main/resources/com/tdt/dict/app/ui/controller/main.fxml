@@ -67,6 +67,11 @@
                                <RadioMenuItem fx:id="btnGtrans" mnemonicParsing="false" onAction="#switchGtrans"
                                               text="GoogleTranslate" toggleGroup="$mode"/>
                            </items>
+                         </Menu>
+                         <Menu mnemonicParsing="false" text="Game">
+                             <items>
+                                 <MenuItem mnemonicParsing="false" onAction="#openGameWindow" text="Hang man"/>
+                             </items>
                         </Menu>
                      </menus>
                        <opaqueInsets>

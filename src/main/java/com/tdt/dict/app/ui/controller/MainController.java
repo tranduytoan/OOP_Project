@@ -88,6 +88,18 @@ public class MainController extends WindowController {
         stage.show();
     }
 
+    public void openGameWindow(ActionEvent event) throws Exception {
+        Stage stage = new Stage();
+        stages.add(stage);
+        stage.setTitle("Game");
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("hangman.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void removeStage(Stage stage) {
         stages.remove(stage);
     }
