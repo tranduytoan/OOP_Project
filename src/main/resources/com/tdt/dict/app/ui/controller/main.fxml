@@ -48,9 +48,10 @@
                    <MenuBar style="-fx-background-color: #555555;" AnchorPane.bottomAnchor="0.0"
                             AnchorPane.topAnchor="0.0">
                      <menus>
-                        <Menu mnemonicParsing="false" text="File">
+                         <Menu mnemonicParsing="false" text="Settings">
                            <items>
-                               <MenuItem id="close" mnemonicParsing="false" text="Close"/>
+                               <MenuItem id="close" mnemonicParsing="false" text="Add word to database"/>
+                               <MenuItem mnemonicParsing="false" text="Export all words"/>
                            </items>
                         </Menu>
                          <Menu mnemonicParsing="false" text="Mode">
