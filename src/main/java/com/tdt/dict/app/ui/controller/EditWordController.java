@@ -50,11 +50,14 @@ public class EditWordController extends WindowController {
             if (alert.getResult().getText().equals("OK")) {
                 word.setWordHtml(htmlEditor.getHtmlText());
                 BasicDictionary.getInstance().edit(word);
+                MainController.getInstance().removeStage(stage);
                 stage.close();
             } else {
+                MainController.getInstance().removeStage(stage);
                 stage.close();
             }
         } else {
+            MainController.getInstance().removeStage(stage);
             stage.close();
         }
 

@@ -52,7 +52,8 @@
                            <items>
                                <MenuItem id="close" fx:id="btnAddWord" mnemonicParsing="false"
                                          onAction="#openAddWordWindow" text="Add word to database"/>
-                               <MenuItem fx:id="btnExportWord" mnemonicParsing="false" text="Export all words"/>
+                               <MenuItem fx:id="btnExportWord" mnemonicParsing="false" onAction="#openExportWindow"
+                                         text="Export all words"/>
                            </items>
                         </Menu>
                          <Menu mnemonicParsing="false" text="Mode">

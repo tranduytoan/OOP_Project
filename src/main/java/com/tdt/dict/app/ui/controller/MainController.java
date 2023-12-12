@@ -13,7 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -23,6 +25,7 @@ public class MainController extends WindowController {
     private Parent gtrans;
     @FXML
     private BorderPane borderPane;
+    private ArrayList<Stage> stages = new ArrayList<>();
 
     public MainController() {
         instance = this;
@@ -44,6 +47,15 @@ public class MainController extends WindowController {
         }
     }
 
+    @Override
+    public void handleClose(ActionEvent event) {
+        for (Stage stage : stages) {
+            stage.close();
+        }
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        stage.close();
+    }
+
     public void switchGtrans(ActionEvent event) throws Exception {
         borderPane.setCenter(gtrans);
     }
@@ -54,6 +66,7 @@ public class MainController extends WindowController {
 
     public void openAddWordWindow(ActionEvent event) throws Exception {
         Stage stage = new Stage();
+        stages.add(stage);
         stage.setTitle("Add Word");
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -61,5 +74,25 @@ public class MainController extends WindowController {
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void openExportWindow(ActionEvent event) throws Exception {
+        Stage stage = new Stage();
+        stages.add(stage);
+        stage.setTitle("Export");
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("exportAllWord.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void removeStage(Stage stage) {
+        stages.remove(stage);
+    }
+
+    public void addStage(Stage stage) {
+        stages.add(stage);
     }
 }

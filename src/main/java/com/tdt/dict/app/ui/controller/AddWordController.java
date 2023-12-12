@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -83,7 +84,9 @@ public class AddWordController extends WindowController {
         alert.setHeaderText("Do you want to exit?");
         alert.showAndWait();
         if (alert.getResult().getText().equals("OK")) {
-            super.handleClose(event);
+            Stage stage = (Stage) btnSave.getScene().getWindow();
+            MainController.getInstance().removeStage(stage);
+            stage.close();
         } else {
             event.consume();
         }

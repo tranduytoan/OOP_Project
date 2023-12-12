@@ -41,6 +41,7 @@ public class GoogleTranslateController implements Initializable {
         mode = Mode.EN_VI;
     }
 
+
     public void switchLanguage() {
         if (mode == Mode.EN_VI) {
             ltl.setText("Vietnamese to English");

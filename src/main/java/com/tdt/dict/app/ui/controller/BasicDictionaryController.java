@@ -123,6 +123,7 @@ public class BasicDictionaryController implements Initializable {
     public void editWord() throws IOException {
         Word word = Database.getInstance().Search(wordInput.getText());
         Stage stage = new Stage();
+        MainController.getInstance().addStage(stage);
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setTitle("Edit Word" + word.getWordTarget());
