@@ -6,7 +6,6 @@
     - Dịch câu
     - Phát âm từ vựng và câu
   - Thêm, sửa, xóa từ vựng.
-  - Chơi game Hangman.
 - _CÁC KĨ THUẬT_ :
     - Sử dụng và truy vấn database SQLite3
     - Sử dụng thư viện đồ họa JavaFX
