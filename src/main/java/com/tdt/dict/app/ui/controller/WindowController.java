@@ -1,12 +1,18 @@
 package com.tdt.dict.app.ui.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public abstract class WindowController implements Initializable {
+    @FXML
+    private Button btnClose;
+    @FXML
+    private Button btnMin;
     protected double xOffset = 0;
     protected double yOffset = 0;
 

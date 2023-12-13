@@ -99,7 +99,6 @@ public class Database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Search successfully");
         return new Word(word, html.toString(), description.toString(), pronounce.toString());
     }
 
