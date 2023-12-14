@@ -1,23 +1,21 @@
-package com.tdt.dict.app.ui.controller;
+package com.tdt.dict.game.hangman.controller;
 
-import com.tdt.dict.app.core.game.hangman.Game;
+import com.tdt.dict.app.ui.controller.WindowController;
+import com.tdt.dict.game.hangman.core.Game;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HangManController extends WindowController {
+    @FXML
+    Text a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
     @FXML
     private AnchorPane startMenu, gamePane;
     @FXML
@@ -30,8 +28,6 @@ public class HangManController extends WindowController {
     private Text suggestions, sg;
     @FXML
     private Button btnContinue;
-    @FXML
-    Text a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
     private Game game;
 
 

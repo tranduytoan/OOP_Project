@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class BasicDictionary extends Dictionary {
     public static BasicDictionary instance;
     private Trie trie;
-    private Database database;
+    private final Database database;
 
     private BasicDictionary() {
         database = Database.getInstance();

@@ -1,4 +1,4 @@
-package com.tdt.dict.app.core.game.hangman;
+package com.tdt.dict.game.hangman.core;
 
 import com.tdt.dict.app.core.Database;
 import com.tdt.dict.app.core.Word;
@@ -16,8 +16,15 @@ public class Logic {
         while (true) {
             int index = random.nextInt(allWords.size());
             Word word = allWords.get(index);
-            if (!word.getWordTarget().contains(" ")) {
-                word.setWordTarget(word.getWordTarget().toLowerCase());
+            word.setWordTarget(word.getWordTarget().toLowerCase());
+            boolean isAllLetter = true;
+            for (Character c : word.getWordTarget().toCharArray()) {
+                if (!Character.isLetter(c)) {
+                    isAllLetter = false;
+                    break;
+                }
+            }
+            if (isAllLetter) {
                 return word;
             }
         }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trie {
-    private TrieNode root;
+    private final TrieNode root;
 
     public Trie() {
         this.root = new TrieNode();
@@ -91,7 +91,7 @@ public class Trie {
     }
 
     private static class TrieNode {
-        private Map<Character, TrieNode> children;
+        private final Map<Character, TrieNode> children;
         private boolean isEndOfWord;
 
         public TrieNode() {

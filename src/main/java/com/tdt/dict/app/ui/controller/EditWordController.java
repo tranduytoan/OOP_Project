@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -68,12 +67,12 @@ public class EditWordController extends WindowController {
         htmlEditor.setHtmlText(word.getWordHtml());
     }
 
-    public void setHtmlEditor(HTMLEditor htmlEditor) {
-        this.htmlEditor = htmlEditor;
-    }
-
     public HTMLEditor getHtmlEditor() {
         return htmlEditor;
+    }
+
+    public void setHtmlEditor(HTMLEditor htmlEditor) {
+        this.htmlEditor = htmlEditor;
     }
 
     public void handleSave() {
@@ -97,8 +96,8 @@ public class EditWordController extends WindowController {
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm");
-            alert.setHeaderText("Are you sure you want to cancel?");
-            alert.setContentText("All changes will be lost");
+            alert.setHeaderText("Are you sure you want to reset?");
+            alert.setContentText("All changes will be reset to the original");
             alert.showAndWait();
             if (alert.getResult().getText().equals("OK")) {
                 htmlEditor.setHtmlText(word.getWordHtml());

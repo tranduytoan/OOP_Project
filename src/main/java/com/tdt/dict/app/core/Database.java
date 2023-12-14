@@ -27,6 +27,61 @@ public class Database {
         return instance;
     }
 
+    public static void main(String[] args) {
+        Database main = new Database();
+        main.Connect();
+        String word;
+        Scanner sc = new Scanner(System.in);
+        boolean search = true;
+        boolean insert = false;
+        label:
+        while (true) {
+            System.out.print("Enter word: ");
+            word = sc.nextLine();
+            switch (word) {
+                case "/exit":
+                    main.Disconnect();
+                    break label;
+                case "/insert":
+                    System.out.println("Insert mode");
+                    search = false;
+                    insert = true;
+                    continue;
+                case "/search":
+                    System.out.println("Search mode");
+                    search = true;
+                    insert = false;
+                    continue;
+                default:
+                    if (insert) {
+                        if (word.isEmpty()) {
+                            System.out.println("Word cannot be empty");
+                            continue;
+                        }
+                        System.out.print("Enter html: ");
+                        String html = sc.nextLine();
+                        if (html.isEmpty()) {
+                            html = "null";
+                        }
+                        System.out.print("Enter description: ");
+                        String description = sc.nextLine();
+                        if (description.isEmpty()) {
+                            description = "this word has no description";
+                        }
+                        System.out.print("Enter pronounce: ");
+                        String pronounce = sc.nextLine();
+                        if (pronounce.isEmpty()) {
+                            pronounce = "null";
+                        }
+                        main.Insert(new Word(word, html, description, pronounce));
+                    } else if (search) {
+                        main.Search(word);
+                    }
+            }
+
+        }
+    }
+
     /**
      * Kết nối đến db
      */
@@ -205,60 +260,5 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return words;
-    }
-
-    public static void main(String[] args) {
-        Database main = new Database();
-        main.Connect();
-        String word;
-        Scanner sc = new Scanner(System.in);
-        boolean search = true;
-        boolean insert = false;
-        label:
-        while (true) {
-            System.out.print("Enter word: ");
-            word = sc.nextLine();
-            switch (word) {
-                case "/exit":
-                    main.Disconnect();
-                    break label;
-                case "/insert":
-                    System.out.println("Insert mode");
-                    search = false;
-                    insert = true;
-                    continue;
-                case "/search":
-                    System.out.println("Search mode");
-                    search = true;
-                    insert = false;
-                    continue;
-                default:
-                    if (insert) {
-                        if (word.isEmpty()) {
-                            System.out.println("Word cannot be empty");
-                            continue;
-                        }
-                        System.out.print("Enter html: ");
-                        String html = sc.nextLine();
-                        if (html.isEmpty()) {
-                            html = "null";
-                        }
-                        System.out.print("Enter description: ");
-                        String description = sc.nextLine();
-                        if (description.isEmpty()) {
-                            description = "this word has no description";
-                        }
-                        System.out.print("Enter pronounce: ");
-                        String pronounce = sc.nextLine();
-                        if (pronounce.isEmpty()) {
-                            pronounce = "null";
-                        }
-                        main.Insert(new Word(word, html, description, pronounce));
-                    } else if (search) {
-                        main.Search(word);
-                    }
-            }
-
-        }
     }
 }

@@ -14,4 +14,6 @@ module com.tdt.dict {
     exports com.tdt.dict;
     exports com.tdt.dict.app.core;
     exports com.tdt.dict.app.ui.controller;
+    exports com.tdt.dict.game.hangman.controller;
+    opens com.tdt.dict.game.hangman.controller to javafx.fxml;
 }

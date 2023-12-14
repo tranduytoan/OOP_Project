@@ -4,16 +4,11 @@ package com.tdt.dict.app.ui.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,7 +20,7 @@ public class MainController extends WindowController {
     private Parent gtrans;
     @FXML
     private BorderPane borderPane;
-    private ArrayList<Stage> stages = new ArrayList<>();
+    private final ArrayList<Stage> stages = new ArrayList<>();
 
     public MainController() {
         instance = this;
@@ -94,7 +89,7 @@ public class MainController extends WindowController {
         stage.setTitle("Game");
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("hangman.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tdt/dict/game/hangman/controller/hangman.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.show();

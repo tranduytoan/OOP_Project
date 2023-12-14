@@ -9,12 +9,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public abstract class WindowController implements Initializable {
+    protected double xOffset = 0;
+    protected double yOffset = 0;
     @FXML
     private Button btnClose;
     @FXML
     private Button btnMin;
-    protected double xOffset = 0;
-    protected double yOffset = 0;
 
     public void handleClose(ActionEvent event) {
         Node source = (Node) event.getSource();

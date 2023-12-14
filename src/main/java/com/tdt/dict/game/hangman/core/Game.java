@@ -1,18 +1,18 @@
-package com.tdt.dict.app.core.game.hangman;
+package com.tdt.dict.game.hangman.core;
 
 import com.tdt.dict.app.core.Word;
 
 import java.util.ArrayList;
 
 public class Game {
-    private Word word;
+    Logic logic;
+    private final Word word;
     private String secretWord;
     private int lives;
-    private int Length;
-    private ArrayList<Character> guessedLetters;
+    private final int Length;
+    private final ArrayList<Character> guessedLetters;
     private boolean isWin;
     private boolean isLose;
-    Logic logic;
 
     public Game() {
         logic = new Logic();

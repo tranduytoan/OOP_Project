@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
-<AnchorPane prefHeight="565.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="565.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/20.0.1"
             fx:controller="com.tdt.dict.app.ui.controller.GoogleTranslateController">
     <children>
         <TextArea layoutX="14.0" layoutY="109.0" prefHeight="442.0" prefWidth="399.0" wrapText="true"/>

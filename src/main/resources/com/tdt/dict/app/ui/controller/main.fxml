@@ -15,75 +15,77 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.tdt.dict.app.ui.controller.MainController">
-   <children>
-       <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="900.0" style="-fx-border-radius: 14;"
-                   styleClass="borderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                   AnchorPane.topAnchor="0.0">
-         <top>
-             <AnchorPane fx:id="titlePane" onMouseClicked="#handleClicked" onMouseDragged="#handleDrag"
-                         onMousePressed="#handlePressed" prefHeight="35.0" prefWidth="900.0"
-                         style="-fx-background-color: #313233;" styleClass="title-bar" BorderPane.alignment="CENTER">
-               <children>
-                   <Button fx:id="btClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="35.0"
-                           prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="0.0">
-                     <effect>
-                        <ImageInput>
-                           <source>
-                               <Image url="@../../../../../../images/close-35.png"/>
-                           </source>
-                        </ImageInput>
-                     </effect>
-                  </Button>
-                   <Button fx:id="btMin" layoutX="830.0" mnemonicParsing="false" onAction="#handleMinimize"
-                           prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <effect>
-                        <ImageInput>
-                           <source>
-                               <Image url="@../../../../../../images/minimize-35.png"/>
-                           </source>
-                        </ImageInput>
-                     </effect>
-                  </Button>
-                   <MenuBar style="-fx-background-color: #555555;" AnchorPane.bottomAnchor="0.0"
-                            AnchorPane.topAnchor="0.0">
-                     <menus>
-                         <Menu mnemonicParsing="false" text="Settings">
-                           <items>
-                               <MenuItem id="close" fx:id="btnAddWord" mnemonicParsing="false"
-                                         onAction="#openAddWordWindow" text="Add word to database"/>
-                               <MenuItem fx:id="btnExportWord" mnemonicParsing="false" onAction="#openExportWindow"
-                                         text="Export all words"/>
-                           </items>
-                        </Menu>
-                         <Menu mnemonicParsing="false" text="Mode">
-                           <items>
-                               <RadioMenuItem fx:id="btnDict" mnemonicParsing="false" onAction="#switchBasicDict"
-                                              selected="true" text="Dictionary">
-                                   <toggleGroup>
-                                       <ToggleGroup fx:id="mode"/>
-                                   </toggleGroup>
-                               </RadioMenuItem>
-                               <RadioMenuItem fx:id="btnGtrans" mnemonicParsing="false" onAction="#switchGtrans"
-                                              text="GoogleTranslate" toggleGroup="$mode"/>
-                           </items>
-                         </Menu>
-                         <Menu mnemonicParsing="false" text="Game">
-                             <items>
-                                 <MenuItem mnemonicParsing="false" onAction="#openGameWindow" text="Hang man"/>
-                             </items>
-                        </Menu>
-                     </menus>
-                       <opaqueInsets>
-                           <Insets/>
-                       </opaqueInsets>
-                     <padding>
-                         <Insets top="5.0"/>
-                     </padding>
-                  </MenuBar>
-               </children>
-            </AnchorPane>
-         </top>
-      </BorderPane>
-   </children>
+    <children>
+        <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="900.0" style="-fx-border-radius: 14;"
+                    styleClass="borderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane fx:id="titlePane" onMouseClicked="#handleClicked" onMouseDragged="#handleDrag"
+                            onMousePressed="#handlePressed" prefHeight="35.0" prefWidth="900.0"
+                            style="-fx-background-color: #313233;" styleClass="title-bar" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="btClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="35.0"
+                                prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                            <effect>
+                                <ImageInput>
+                                    <source>
+                                        <Image url="file:/D:/GITHUB/OOP_Project/src/main/resources/images/close-35.png"/>
+                                    </source>
+                                </ImageInput>
+                            </effect>
+                        </Button>
+                        <Button fx:id="btMin" layoutX="830.0" mnemonicParsing="false" onAction="#handleMinimize"
+                                prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                            <effect>
+                                <ImageInput>
+                                    <source>
+                                        <Image url="file:/D:/GITHUB/OOP_Project/src/main/resources/images/minimize-35.png"/>
+                                    </source>
+                                </ImageInput>
+                            </effect>
+                        </Button>
+                        <MenuBar style="-fx-background-color: #555555;" AnchorPane.bottomAnchor="0.0"
+                                 AnchorPane.topAnchor="0.0">
+                            <menus>
+                                <Menu mnemonicParsing="false" text="Settings">
+                                    <items>
+                                        <MenuItem id="close" fx:id="btnAddWord" mnemonicParsing="false"
+                                                  onAction="#openAddWordWindow" text="Add word to database"/>
+                                        <MenuItem fx:id="btnExportWord" mnemonicParsing="false"
+                                                  onAction="#openExportWindow" text="Export all words"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Mode">
+                                    <items>
+                                        <RadioMenuItem fx:id="btnDict" mnemonicParsing="false"
+                                                       onAction="#switchBasicDict" selected="true" text="Dictionary">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="mode"/>
+                                            </toggleGroup>
+                                        </RadioMenuItem>
+                                        <RadioMenuItem fx:id="btnGtrans" mnemonicParsing="false"
+                                                       onAction="#switchGtrans" text="GoogleTranslate"
+                                                       toggleGroup="$mode"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Game">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#openGameWindow" text="Hang man"/>
+                                    </items>
+                                </Menu>
+                            </menus>
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets top="5.0"/>
+                            </padding>
+                        </MenuBar>
+                    </children>
+                </AnchorPane>
+            </top>
+        </BorderPane>
+    </children>
 </AnchorPane>

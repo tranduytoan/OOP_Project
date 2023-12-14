@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GoogleTranslateController implements Initializable {
+    Mode mode;
     @FXML
     private Button btnTranslate;
     @FXML
@@ -28,19 +29,11 @@ public class GoogleTranslateController implements Initializable {
     @FXML
     private Text ltl;
 
-    public enum Mode {
-        EN_VI,
-        VI_EN
-    }
-
-    Mode mode;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ltl.setText("English to Vietnamese");
         mode = Mode.EN_VI;
     }
-
 
     public void switchLanguage() {
         if (mode == Mode.EN_VI) {
@@ -100,5 +93,10 @@ public class GoogleTranslateController implements Initializable {
         } else {
             GoogleTranslate.speak(textDefine.getText(), GoogleTranslate.lang.ENGLISH);
         }
+    }
+
+    public enum Mode {
+        EN_VI,
+        VI_EN
     }
 }

@@ -1,6 +1,6 @@
 package com.tdt.dict.app.core;
 
-import com.tdt.dict.app.core.game.hangman.Game;
+import com.tdt.dict.game.hangman.core.Game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,107 +10,6 @@ import java.util.Scanner;
 
 public class DictionaryCommandline extends Dictionary {
     Database database;
-
-    @Override
-    public void init() {
-        database = Database.getInstance();
-        database.Connect();
-    }
-
-    @Override
-    public void close() {
-        database.Disconnect();
-        System.out.println("Goodbye!");
-    }
-
-    @Override
-    public ArrayList<Word> getAllWords() {
-        return Database.getInstance().getAllWords();
-    }
-
-    @Override
-    public String search(String word) {
-        if (word.isEmpty()) {
-            System.out.println("Word cannot be empty");
-            return null;
-        }
-        Word wordObj = Database.getInstance().Search(word);
-        if (wordObj == null) {
-            System.out.println("Word does not exist");
-            return null;
-        }
-        return wordObj.getWordExplain();
-    }
-
-    @Override
-    public void insert(Word word) {
-        if (word.getWordTarget().isEmpty()) {
-            System.out.println("Word cannot be empty");
-            return;
-        }
-        if (Database.getInstance().Search(word.getWordTarget()) != null) {
-            System.out.println("Word already exists");
-            return;
-        }
-        Database.getInstance().Insert(word);
-        System.out.println("Word added");
-    }
-
-    @Override
-    public void edit(Word word) {
-        Scanner scanner = new Scanner(System.in);
-        if (word == null) {
-            System.out.println("Word does not exist for edit");
-        } else {
-            System.out.println("Enter new word explain: ");
-            word.setWordExplain(scanner.nextLine());
-            Database.getInstance().EditWord(word);
-            System.out.println("Word updated");
-        }
-    }
-
-    @Override
-    public void delete(Word word) {
-        if (word.getWordTarget().isEmpty()) {
-            System.out.println("Word cannot be empty");
-            return;
-        }
-        Word wordObj = Database.getInstance().Search(word.getWordTarget());
-        if (wordObj == null) {
-            System.out.println("Word does not exist");
-            return;
-        } else {
-            System.out.println("Do you want to delete word: ");
-            System.out.println("\t" + wordObj.getWordTarget() + " " + wordObj.getWordExplain());
-            System.out.println("YES/NO(y/n): ");
-            Scanner scanner = new Scanner(System.in);
-            String choice = scanner.nextLine();
-            if (choice.equals("y") || choice.equals("Y") || choice.equals("yes") || choice.equals("YES")) {
-                Database.getInstance().DeleteWord(word);
-                System.out.println("Word deleted");
-            } else {
-                System.out.println("Word not deleted");
-            }
-        }
-    }
-
-    public int menuSelect() {
-        System.out.println("Welcome to Dictionary!");
-        System.out.println("0. Exit");
-        System.out.println("1. Add");
-        System.out.println("2. Remove");
-        System.out.println("3. Update");
-        System.out.println("4. Display");
-        System.out.println("5. Search");
-        System.out.println("6. Game");
-        System.out.println("7. Export");
-        System.out.print("Your choice: ");
-
-        int choice;
-        Scanner scanner = new Scanner(System.in);
-        choice = scanner.nextInt();
-        return choice;
-    }
 
     public static void main(String[] args) {
         DictionaryCommandline dictionayCommandline = new DictionaryCommandline();
@@ -202,6 +101,106 @@ public class DictionaryCommandline extends Dictionary {
             choice = dictionayCommandline.menuSelect();
         }
         dictionayCommandline.close();
+    }
+
+    @Override
+    public void init() {
+        database = Database.getInstance();
+        database.Connect();
+    }
+
+    @Override
+    public void close() {
+        database.Disconnect();
+        System.out.println("Goodbye!");
+    }
+
+    @Override
+    public ArrayList<Word> getAllWords() {
+        return Database.getInstance().getAllWords();
+    }
+
+    @Override
+    public String search(String word) {
+        if (word.isEmpty()) {
+            System.out.println("Word cannot be empty");
+            return null;
+        }
+        Word wordObj = Database.getInstance().Search(word);
+        if (wordObj == null) {
+            System.out.println("Word does not exist");
+            return null;
+        }
+        return wordObj.getWordExplain();
+    }
+
+    @Override
+    public void insert(Word word) {
+        if (word.getWordTarget().isEmpty()) {
+            System.out.println("Word cannot be empty");
+            return;
+        }
+        if (Database.getInstance().Search(word.getWordTarget()) != null) {
+            System.out.println("Word already exists");
+            return;
+        }
+        Database.getInstance().Insert(word);
+        System.out.println("Word added");
+    }
+
+    @Override
+    public void edit(Word word) {
+        Scanner scanner = new Scanner(System.in);
+        if (word == null) {
+            System.out.println("Word does not exist for edit");
+        } else {
+            System.out.println("Enter new word explain: ");
+            word.setWordExplain(scanner.nextLine());
+            Database.getInstance().EditWord(word);
+            System.out.println("Word updated");
+        }
+    }
+
+    @Override
+    public void delete(Word word) {
+        if (word.getWordTarget().isEmpty()) {
+            System.out.println("Word cannot be empty");
+            return;
+        }
+        Word wordObj = Database.getInstance().Search(word.getWordTarget());
+        if (wordObj == null) {
+            System.out.println("Word does not exist");
+        } else {
+            System.out.println("Do you want to delete word: ");
+            System.out.println("\t" + wordObj.getWordTarget() + " " + wordObj.getWordExplain());
+            System.out.println("YES/NO(y/n): ");
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            if (choice.equals("y") || choice.equals("Y") || choice.equals("yes") || choice.equals("YES")) {
+                Database.getInstance().DeleteWord(word);
+                System.out.println("Word deleted");
+            } else {
+                System.out.println("Word not deleted");
+            }
+        }
+    }
+
+    public int menuSelect() {
+        System.out.println("Welcome to Dictionary!");
+        System.out.println("0. Exit");
+        System.out.println("1. Add");
+        System.out.println("2. Remove");
+        System.out.println("3. Update");
+        System.out.println("4. Display");
+        System.out.println("5. Search");
+        System.out.println("6. Game");
+        System.out.println("7. Export");
+        System.out.print("Your choice: ");
+
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        choice = scanner.nextInt();
+        return choice;
     }
 
     public void clearScreen() {

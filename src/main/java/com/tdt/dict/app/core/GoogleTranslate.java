@@ -15,21 +15,6 @@ public class GoogleTranslate {
     private static final String TTS_URL = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob";
     private static final String TRANSLATE_URL = "https://script.google.com/macros/s/AKfycby3AOWmhe32TgV9nW-Q0TyGOEyCHQeFiIn7hRgy5m8jHPaXDl2GdToyW_3Ys5MTbK6wjg/exec?q=%s&target=%s&source=%s";
 
-    public enum lang {
-        ENGLISH("en"),
-        VIETNAMESE("vi");
-
-        private final String value;
-
-        lang(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
     public static void speak(String text, lang lang) {
         HttpURLConnection con = null;
         try {
@@ -63,6 +48,21 @@ public class GoogleTranslate {
             return in.lines().collect(Collectors.joining("\n"));
         } finally {
             con.disconnect();
+        }
+    }
+
+    public enum lang {
+        ENGLISH("en"),
+        VIETNAMESE("vi");
+
+        private final String value;
+
+        lang(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
         }
     }
 }
