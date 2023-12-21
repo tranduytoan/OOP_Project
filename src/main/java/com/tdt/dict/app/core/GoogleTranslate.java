@@ -1,5 +1,6 @@
 package com.tdt.dict.app.core;
 
+import com.tdt.dict.MultiThreading;
 import javazoom.jl.player.Player;
 
 import java.io.BufferedReader;
@@ -9,28 +10,32 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 public class GoogleTranslate {
     private static final String TTS_URL = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob";
     private static final String TRANSLATE_URL = "https://script.google.com/macros/s/AKfycby3AOWmhe32TgV9nW-Q0TyGOEyCHQeFiIn7hRgy5m8jHPaXDl2GdToyW_3Ys5MTbK6wjg/exec?q=%s&target=%s&source=%s";
 
-    public static void speak(String text, lang lang) {
-        HttpURLConnection con = null;
-        try {
-            String urlStr = TTS_URL +
-                    "&tl=" + lang.getValue() +
-                    "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8);
+    public synchronized static void speak(String text, lang lang) {
+        Runnable task = () -> {
+            HttpURLConnection con = null;
+            try {
+                String urlStr = TTS_URL +
+                        "&tl=" + lang.getValue() +
+                        "&q=" + URLEncoder.encode(text, StandardCharsets.UTF_8);
 
-            con = (HttpURLConnection) new URL(urlStr).openConnection();
-            new Player(con.getInputStream()).play();
-        } catch (Exception e) {
-            System.err.println("Text to speech error!");
-        } finally {
-            if (con != null) {
-                con.disconnect();
+                con = (HttpURLConnection) new URL(urlStr).openConnection();
+                new Player(con.getInputStream()).play();
+            } catch (Exception e) {
+                System.err.println("Text to speech error!");
+            } finally {
+                if (con != null) {
+                    con.disconnect();
+                }
             }
-        }
+        };
+        MultiThreading.getInstance().submitRunnableTask(task);
     }
 
     public static String translate(lang langFrom, lang langTo, String text) throws IOException {

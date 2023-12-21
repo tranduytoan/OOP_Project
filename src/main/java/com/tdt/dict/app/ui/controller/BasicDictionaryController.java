@@ -1,5 +1,6 @@
 package com.tdt.dict.app.ui.controller;
 
+import com.tdt.dict.MultiThreading;
 import com.tdt.dict.app.core.BasicDictionary;
 import com.tdt.dict.app.core.Database;
 import com.tdt.dict.app.core.GoogleTranslate;

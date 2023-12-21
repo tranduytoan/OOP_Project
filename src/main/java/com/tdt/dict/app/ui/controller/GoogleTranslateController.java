@@ -1,5 +1,6 @@
 package com.tdt.dict.app.ui.controller;
 
+import com.tdt.dict.MultiThreading;
 import com.tdt.dict.app.core.GoogleTranslate;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,26 +53,30 @@ public class GoogleTranslateController implements Initializable {
     }
 
     public void translate() throws IOException {
-        if (mode == Mode.EN_VI) {
-            textDefine.setText(GoogleTranslate.translate(GoogleTranslate.lang.ENGLISH,
-                    GoogleTranslate.lang.VIETNAMESE,
-                    textTarget.getText()));
-        } else {
-            textDefine.setText(GoogleTranslate.translate(GoogleTranslate.lang.VIETNAMESE,
-                    GoogleTranslate.lang.ENGLISH,
-                    textTarget.getText()));
-        }
+        Runnable task = () -> {
+            if (mode == Mode.EN_VI) {
+                try {
+                    textDefine.setText(GoogleTranslate.translate(GoogleTranslate.lang.ENGLISH,
+                            GoogleTranslate.lang.VIETNAMESE,
+                            textTarget.getText()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                try {
+                    textDefine.setText(GoogleTranslate.translate(GoogleTranslate.lang.VIETNAMESE,
+                            GoogleTranslate.lang.ENGLISH,
+                            textTarget.getText()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        MultiThreading.getInstance().submitRunnableTask(task);
     }
 
     public void speak1() throws IOException {
-        if (textTarget.getText().length() > 200) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText("Text too long for text to speech");
-            alert.setContentText("Maximum length is 200 characters");
-            alert.showAndWait();
-            return;
-        }
+        if (textTooLong(textTarget)) return;
         if (mode == Mode.EN_VI) {
             GoogleTranslate.speak(textTarget.getText(), GoogleTranslate.lang.ENGLISH);
         } else {
@@ -80,19 +85,24 @@ public class GoogleTranslateController implements Initializable {
     }
 
     public void speak2() throws IOException {
+        if (textTooLong(textDefine)) return;
+        if (mode == Mode.EN_VI) {
+            GoogleTranslate.speak(textDefine.getText(), GoogleTranslate.lang.VIETNAMESE);
+        } else {
+            GoogleTranslate.speak(textDefine.getText(), GoogleTranslate.lang.ENGLISH);
+        }
+    }
+
+    private boolean textTooLong(TextArea textDefine) {
         if (textDefine.getText().length() > 200) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText("Text too long for text to speech");
             alert.setContentText("Maximum length is 200 characters");
             alert.showAndWait();
-            return;
+            return true;
         }
-        if (mode == Mode.EN_VI) {
-            GoogleTranslate.speak(textDefine.getText(), GoogleTranslate.lang.VIETNAMESE);
-        } else {
-            GoogleTranslate.speak(textDefine.getText(), GoogleTranslate.lang.ENGLISH);
-        }
+        return false;
     }
 
     public enum Mode {
