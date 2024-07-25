@@ -3,6 +3,7 @@ package com.tdt.dict.app.core;
 import com.tdt.dict.game.hangman.core.Game;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class DictionaryCommandline extends Dictionary {
     Database database;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         DictionaryCommandline dictionayCommandline = new DictionaryCommandline();
         dictionayCommandline.init();
         int choice = dictionayCommandline.menuSelect();
@@ -91,7 +92,6 @@ public class DictionaryCommandline extends Dictionary {
                     }
                     System.out.println("Enter any key to continue");
                     Scanner scanner5 = new Scanner(System.in);
-                    scanner5.nextLine();
                     break;
                 default:
                     System.out.println("Invalid choice");
